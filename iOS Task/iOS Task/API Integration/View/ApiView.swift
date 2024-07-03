@@ -16,11 +16,24 @@ struct DataView: View {
         
             if let errorMessage = viewModel.error {
                 
-                Text("Error: \(errorMessage.localizedDescription)")
-                    .foregroundColor(.red)
-                    .onAppear(){
-                        APIService.shared.fetchDataAndPublish()
-                    }
+                VStack{
+                    
+                    Image("no-wifi")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100,height: 100)
+                    
+                    Text("\(errorMessage.localizedDescription)")
+                        .bold()
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
+                        .onAppear(){
+                            viewModel.fetchDataAndPublish()
+                        }
+              
+                }.padding(.horizontal)
+                    
                 
             } else {
                 

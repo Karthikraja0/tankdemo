@@ -52,6 +52,7 @@ class APIService: ObservableObject {
                     print("Failed to fetch data: \(error.localizedDescription)")
                 }
             }, receiveValue: { [weak self] data in
+                self?.error = nil
                 self?.data = data
             })
             .store(in: &cancellables)
